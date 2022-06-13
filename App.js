@@ -1,10 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+/** @format */
+
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import LatestProducts from "./components/items/LatestProducts";
+import TopSelling from "./components/items/TopSelling";
+import Navbar from "./components/navbar/Navbar";
+import Model from "./components/model/Model";
+import { useState } from "react";
 
 export default function App() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [itemsId, setItemId] = useState();
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <View>
+        <Navbar />
+        <TopSelling setItemId={setItemId} setModalVisible={setModalVisible} />
+        <LatestProducts
+          setItemId={setItemId}
+          setModalVisible={setModalVisible}
+        />
+        <Model
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          itemsId={itemsId}
+        />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -12,9 +34,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
   },
 });
